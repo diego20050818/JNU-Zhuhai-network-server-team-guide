@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>暨南大学珠海校区网络服务手册</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="暨南大学珠海校区网络服务手册">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+
+  <style>
+    :root {
+      --theme-color: #0078d4;
+      --theme-color-dark: #106ebe;
+      --theme-color-light: #deecf9;
+      --accent-color: #0078d4;
+      --success-color: #107c10;
+      --warning-color: #fdb74a;
+      --error-color: #d13438;
+      --base-font-family: "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+      --code-font-family: "Consolas", "Courier New", monospace;
+      --sidebar-width: 280px;
+      --content-max-width: 1200px;
+      --border-radius: 12px;
+      --border-radius-small: 8px;
+    }
+
+    /* 全局背景 - 渐变效果 */
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+      font-family: var(--base-font-family);
+    }
+
+    /* 侧边栏 - 玻璃拟态效果 */
+    .sidebar {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-right: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      padding: 20px 0;
+    }
+
+    /* 侧边栏标题 - 纯色 */
+    .sidebar>h1 {
+      padding: 16px 24px;
+      margin: 0 0 12px 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: #0078d4;
+      letter-spacing: -0.5px;
+    }
+
+    /* 侧边栏调整大小拖拽条 */
+    .sidebar-resizer {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 5px;
+      height: 100%;
+      cursor: col-resize;
+      background: transparent;
+      z-index: 100;
+      transition: background 0.2s ease;
+    }
+
+    .sidebar-resizer:hover,
+    .sidebar-resizer.dragging {
+      background: rgba(0, 120, 212, 0.3);
+    }
+
+    .sidebar.resizing {
+      user-select: none;
+      pointer-events: none;
+    }
+
+    body.resizing {
+      cursor: col-resize;
+      user-select: none;
+    }
+
+    /* 侧边栏导航 */
+    .sidebar-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar-nav li {
+      margin: 4px 12px;
+    }
+
+    .sidebar-nav li a {
+      display: block;
+      padding: 10px 16px;
+      color: #323130;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: var(--border-radius-small);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    .sidebar-nav li a:hover {
+      background: rgba(0, 120, 212, 0.08);
+      color: #0078d4;
+      transform: translateX(4px);
+      box-shadow: inset 0 0 8px rgba(0, 120, 212, 0.1);
+    }
+
+    .sidebar-nav li.active>a {
+      background: rgba(0, 120, 212, 0.12);
+      color: #0078d4;
+      font-weight: 600;
+      box-shadow: inset 0 0 12px rgba(0, 120, 212, 0.15);
+    }
+
+    /* 侧边栏展开/收缩按钮 - Fluent 样式，无边框 */
+    .sidebar-toggle {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border: none;
+      border-radius: var(--border-radius-small);
+      padding: 8px;
+      box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar-toggle:hover {
+      background: rgba(0, 120, 212, 0.08);
+      box-shadow: 0 4px 12px rgba(0, 120, 212, 0.2);
+    }
+
+    .sidebar-toggle span {
+      background: #0078d4;
+    }
+
+    /* 内容区域 - 玻璃拟态卡片 */
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 48px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+      margin: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #201f1e;
+      font-weight: 700;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+      position: relative;
+
+    }
+
+    h1 {
+      font-size: 36px;
+      line-height: 1.2;
+      padding: 0;
+      margin: 0;
+      /* 清除默认 margin */
+      color: #0078d4;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 28px;
+      line-height: 36px;
+      margin-top: 40px;
+      padding-left: 16px;
+
+      background: rgba(0, 120, 212, 0.08);
+      padding: 8px 16px;
+      border-radius: 0 var(--border-radius-small) var(--border-radius-small) 0;
+    }
+
+    h3 {
+      font-size: 22px;
+      line-height: 32px;
+      color: #0078d4;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    h3::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #0078d4;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.2);
+    }
+
+    /* 段落样式 */
+    p {
+      margin: 0 0 16px 0;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #323130;
+    }
+
+    /* 列表样式 */
+    ul,
+    ol {
+      margin: 0 0 16px 0;
+      padding-left: 28px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* 表格样式 - 玻璃拟态，纯色背景 */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0 28px 0;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.15);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    table th,
+    table td {
+      padding: 14px 18px;
+      text-align: left;
+      border: none;
+      border-bottom: 1px solid rgba(237, 235, 233, 0.6);
+    }
+
+    table th {
+      background: rgba(0, 120, 212, 0.1);
+      color: #0078d4;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    table td {
+      font-size: 14px;
+      color: #323130;
+    }
+
+    table tr:hover {
+      background: rgba(0, 120, 212, 0.05);
+    }
+
+    table tr:last-child td {
+      border-bottom: none;
+    }
+
+
+    a {
+      color: #0078d4;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    a:hover {
+      color: #106ebe;
+    }
+
+    a:not(.sidebar-nav a)::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #0078d4;
+      transition: width 0.3s ease;
+    }
+
+
+    /* 代码样式，纯色背景 */
+    code {
+      background: rgba(164, 38, 44, 0.08);
+      color: #a4262c;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.9em;
+      font-family: var(--code-font-family);
+      border: 1px solid rgba(164, 38, 44, 0.15);
+    }
+
+    pre {
+      background: rgba(31, 32, 35, 0.95) !important;
+      backdrop-filter: blur(10px);
+      border-radius: var(--border-radius);
+      padding: 20px !important;
+      box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* 引用块样式 - 玻璃拟态 */
+    blockquote {
+      border-left: 4px solid #0078d4;
+      padding: 16px 20px;
+      margin: 20px 0;
+      color: #323130;
+      background: rgba(0, 120, 212, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 0 var(--border-radius-small) var(--border-radius-small) 0;
+      box-shadow: 0 2px 8px 0 rgba(0, 120, 212, 0.1);
+    }
+
+    /* 搜索框样式 - 玻璃拟态 */
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      /* 控制 h1 和 search 之间的间距 */
+      padding: 32px 48px;
+      /* 其他样式保持不变 */
+    }
+
+    .search input {
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: var(--border-radius-small);
+      padding: 10px 16px;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.1);
+      width: calc(100% - 32px);
+      transition: all 0.2s ease;
+    }
+
+    .search input:focus {
+      border-color: #0078d4;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .search input::placeholder {
+      color: #8a8886;
+    }
+
+    /* 图片样式 - 圆角和阴影 */
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 24px 0 rgba(31, 38, 135, 0.2);
+      margin: 20px 0;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 32px 0 rgba(31, 38, 135, 0.3);
+    }
+
+    /* 按钮样式 - Fluent Design，纯色背景 */
+    button {
+      background: #0078d4;
+      color: #ffffff;
+      border: none;
+      border-radius: var(--border-radius-small);
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 8px 0 rgba(0, 120, 212, 0.3);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px 0 rgba(0, 120, 212, 0.4);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    /* 缩放控制按钮 */
+    .zoom-controls {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      gap: 8px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      padding: 8px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .zoom-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(0, 120, 212, 0.1);
+      border: 1px solid rgba(0, 120, 212, 0.3);
+      color: #0078d4;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .zoom-btn:hover {
+      background: #0078d4;
+      color: white;
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px 0 rgba(0, 120, 212, 0.4);
+    }
+
+    .zoom-reset {
+      padding: 0 12px;
+      width: auto;
+      border-radius: var(--border-radius-small);
+    }
+
+    /* 滚动条样式 */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(243, 242, 241, 0.5);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 120, 212, 0.3);
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 120, 212, 0.5);
+    }
+
+    /* 响应式设计 */
+    @media screen and (max-width: 768px) {
+      .content {
+        padding: 20px 24px;
+        margin: 16px;
+        border-radius: var(--border-radius-small);
+      }
+
+      .sidebar {
+        width: 260px;
+      }
+
+      h1 {
+        font-size: 36px;
+        line-height: 1.2;
+        padding-bottom: 0;
+        margin-bottom: 12px;
+        color: #0078d4;
+      }
+
+      h2 {
+        font-size: 22px;
+        line-height: 30px;
+      }
+
+      h3 {
+        font-size: 18px;
+      }
+
+      p,
+      li {
+        font-size: 15px;
+      }
+
+      table {
+        font-size: 13px;
+      }
+
+      table th,
+      table td {
+        padding: 10px 12px;
+      }
+
+      .zoom-controls {
+        bottom: 16px;
+        right: 16px;
+        padding: 6px;
+      }
+
+      .zoom-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+      }
+
+      /* 确保侧边栏在移动端正常展开/收缩 */
+      .app-sub-sidebar {
+        display: none;
+      }
+
+      .sidebar-toggle {
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">正在加载...</div>
+
+  <!-- 缩放控制 -->
+  <div class="zoom-controls">
+    <button class="zoom-btn" id="zoom-out" title="缩小">−</button>
+    <button class="zoom-btn zoom-reset" id="zoom-reset" title="重置">100%</button>
+    <button class="zoom-btn" id="zoom-in" title="放大">+</button>
+  </div>
+
+  <script>
+    window.$docsify = {
+      name: 'JNU珠海校区网络服务指南',
+      repo: '',
+      loadSidebar: true,
+      subMaxLevel: 3,
+      coverpage: false,
+      themeColor: '#0078d4',
+
+      search: {
+        maxAge: 86400000,
+        paths: 'auto',
+        placeholder: '正在搜索文档(*^▽^*)',
+        noData: '救命...找不到结果(┬┬﹏┬┬)',
+        depth: 3,
+        hideOtherSidebarContent: false
+      },
+
+      copyCode: {
+        buttonText: '📋 复制',
+        errorText: '❌ 错误',
+        successText: '✅ 已复制'
+      },
+
+      markdown: {
+        breaks: true,
+        smartypants: true
+      }
+    }
+
+    // 侧边栏调整大小功能
+    function initSidebarResizer() {
+      const sidebar = document.querySelector('.sidebar');
+      if (!sidebar) return;
+
+      // 创建拖拽条
+      const resizer = document.createElement('div');
+      resizer.className = 'sidebar-resizer';
+      sidebar.appendChild(resizer);
+
+      let isResizing = false;
+      let startX = 0;
+      let startWidth = 0;
+      const minWidth = 200;
+      const maxWidth = 500;
+
+      resizer.addEventListener('mousedown', function (e) {
+        isResizing = true;
+        startX = e.clientX;
+        startWidth = sidebar.offsetWidth;
+        resizer.classList.add('dragging');
+        document.body.classList.add('resizing');
+        sidebar.style.pointerEvents = 'none';
+        e.preventDefault();
+      });
+
+      document.addEventListener('mousemove', function (e) {
+        if (!isResizing) return;
+
+        const delta = e.clientX - startX;
+        let newWidth = startWidth + delta;
+
+        // 限制宽度范围
+        newWidth = Math.max(minWidth, Math.min(maxWidth, newWidth));
+
+        sidebar.style.width = newWidth + 'px';
+        document.documentElement.style.setProperty('--sidebar-width', newWidth + 'px');
+
+        // 保存宽度到 localStorage
+        localStorage.setItem('sidebar-width', newWidth);
+      });
+
+      document.addEventListener('mouseup', function () {
+        if (isResizing) {
+          isResizing = false;
+          resizer.classList.remove('dragging');
+          document.body.classList.remove('resizing');
+          sidebar.style.pointerEvents = '';
+        }
+      });
+
+      // 恢复上次保存的宽度
+      const savedWidth = localStorage.getItem('sidebar-width');
+      if (savedWidth) {
+        const width = parseInt(savedWidth);
+        sidebar.style.width = width + 'px';
+        document.documentElement.style.setProperty('--sidebar-width', width + 'px');
+      }
+    }
+
+    // 在 Docsify 加载完成后初始化
+    window.addEventListener('load', function () {
+      setTimeout(initSidebarResizer, 100);
+    });
+
+    // 缩放功能
+    let zoomLevel = 100;
+    const minZoom = 70;
+    const maxZoom = 150;
+    const zoomStep = 10;
+
+    function updateZoom() {
+      document.body.style.zoom = zoomLevel + '%';
+      document.getElementById('zoom-reset').textContent = zoomLevel + '%';
+      localStorage.setItem('docsify-zoom', zoomLevel);
+    }
+
+    // 恢复上次的缩放级别
+    const savedZoom = localStorage.getItem('docsify-zoom');
+    if (savedZoom) {
+      zoomLevel = parseInt(savedZoom);
+      updateZoom();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const zoomInBtn = document.getElementById('zoom-in');
+      const zoomOutBtn = document.getElementById('zoom-out');
+      const zoomResetBtn = document.getElementById('zoom-reset');
+
+      zoomInBtn.addEventListener('click', function () {
+        if (zoomLevel < maxZoom) {
+          zoomLevel += zoomStep;
+          updateZoom();
+        }
+      });
+
+      zoomOutBtn.addEventListener('click', function () {
+        if (zoomLevel > minZoom) {
+          zoomLevel -= zoomStep;
+          updateZoom();
+        }
+      });
+
+      zoomResetBtn.addEventListener('click', function () {
+        zoomLevel = 100;
+        updateZoom();
+      });
+
+      // 键盘快捷键 - 防止重复绑定
+      document.addEventListener('keydown', function (e) {
+        if (e.ctrlKey || e.metaKey) {
+          if (e.key === '=' || e.key === '+') {
+            e.preventDefault();
+            zoomInBtn.click();
+          } else if (e.key === '-') {
+            e.preventDefault();
+            zoomOutBtn.click();
+          } else if (e.key === '0') {
+            e.preventDefault();
+            zoomResetBtn.click();
+          }
+        }
+      });
+    });
+  </script>
+
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+</body>
+
+</html>
