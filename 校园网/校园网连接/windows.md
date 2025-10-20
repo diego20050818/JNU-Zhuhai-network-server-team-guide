@@ -1,11 +1,11 @@
 # windows系统连接Jnu-Secure
-## 1. 打开设置
+## 1. 打开`设置`
 ![alt text](img/connect05.png)
 
 ## 2. 点开`Wlan`
 ![alt text](img/connect06.png)
 
-## 3. 显示可用网络
+## 3. 显示`可用网络`
 ![alt text](img/connect07.png)
 
 ## 4. 点击`Jnu-Secure`并点击`连接`按钮

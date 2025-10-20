@@ -186,11 +186,22 @@
       font-size: 28px;
       line-height: 36px;
       margin-top: 40px;
-      padding-left: 16px;
+      padding: 16px 24px; /* 增加内边距，避免文字贴边 */
+      background: transparent; /* 默认透明背景，更简洁 */
+      color: #5f6368; /* Google 深灰色文字 */
+      border-radius: 8px;
+      border-left: 4px solid #1a73e8; /* Google 蓝色左边框 */
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Google 动画曲线 */
+      font-weight: 500; /* Google 字重 */
+      letter-spacing: 0.2px; /* 轻微字间距 */
+    }
 
-      background: rgba(0, 120, 212, 0.08);
-      padding: 8px 16px;
-      border-radius: 0 var(--border-radius-small) var(--border-radius-small) 0;
+    /* h2 悬停效果 - 只改变文字颜色 */
+    h2:hover {
+      color: #1a73e8; /* Google 蓝色文字 */
+      background: transparent; /* 保持透明背景 */
+      border-left-color: #1a73e8; /* 保持边框颜色 */
+      transform: translateX(2px); /* 轻微向右移动 */
     }
 
     h3 {
@@ -301,24 +312,38 @@
 
 
     /* 代码样式，纯色背景 */
+    /* 代码样式，纯色背景 */
     code {
-      background: rgba(164, 38, 44, 0.08);
-      color: #a4262c;
+      background: #f8f9fa; /* Google浅灰色背景 */
+      color: #202124; /* Google深灰文字 */
       padding: 3px 8px;
       border-radius: 6px;
       font-size: 0.9em;
       font-family: var(--code-font-family);
-      border: 1px solid rgba(164, 38, 44, 0.15);
+      border: none; /* 移除边框 */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 添加柔和阴影 */
+      transition: all 0.2s ease; /* 添加过渡效果 */
     }
 
+    /* 代码块容器 - 增加外层卡片样式 */
     pre {
+      background: #ffffff; /* 白色背景 */
+      border-radius: var(--border-radius); /* 使用全局圆角 */
+      padding: 16px; /* 增加内边距 */
+      margin: 16px 0; /* 增加上下间距 */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 卡片阴影 */
+      border: 1px solid #eaeaea; /* 浅灰色边框 */
+      overflow: auto; /* 确保内容可滚动 */
+    }
+
+    /* pre {
       background: rgba(31, 32, 35, 0.95) !important;
       backdrop-filter: blur(10px);
       border-radius: var(--border-radius);
       padding: 20px !important;
       box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
       border: 1px solid rgba(255, 255, 255, 0.1);
-    }
+    } */
 
     /* 引用块样式 - 玻璃拟态 */
     blockquote {
@@ -557,6 +582,13 @@
       coverpage: false,
       themeColor: '#0078d4',
 
+      formatUpdated: '{MM}/{DD} {HH}:{mm}',
+
+      formatUpdated: function (time) {
+        // ...
+        return time;
+      },
+
       search: {
         maxAge: 86400000,
         paths: 'auto',
@@ -576,6 +608,8 @@
         breaks: true,
         smartypants: true
       }
+
+
     }
 
     // 侧边栏调整大小功能
@@ -704,6 +738,8 @@
     });
   </script>
 
+  <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
