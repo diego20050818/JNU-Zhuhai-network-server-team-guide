@@ -312,7 +312,6 @@
 
 
     /* 代码样式，纯色背景 */
-    /* 代码样式，纯色背景 */
     code {
       background: #f8f9fa; /* Google浅灰色背景 */
       color: #202124; /* Google深灰文字 */
@@ -393,20 +392,22 @@
 
     /* 图片样式 - 圆角和阴影 */
     img {
+      display: block;
       max-width: 100%;
       height: auto;
       border-radius: var(--border-radius);
       box-shadow: 0 8px 24px 0 rgba(31, 38, 135, 0.2);
-      margin: 20px 0;
+      margin: 20px auto;
       border: 1px solid rgba(255, 255, 255, 0.5);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-height: 600px; /* 限制最大高度 */
+      object-fit: contain; /* 保持图片比例 */
     }
 
     img:hover {
       transform: scale(1.02);
       box-shadow: 0 12px 32px 0 rgba(31, 38, 135, 0.3);
     }
-
     /* 按钮样式 - Fluent Design，纯色背景 */
     button {
       background: #0078d4;
