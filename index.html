@@ -310,6 +310,11 @@
       transition: width 0.3s ease;
     }
 
+    /* 加粗文字使用主题色 */
+    strong, b {
+      color: var(--theme-color);
+    }
+
 
     /* 代码样式，纯色背景 */
     code {
@@ -600,9 +605,9 @@
       },
 
       copyCode: {
-        buttonText: '📋 复制',
+        buttonText: 'copy',
         errorText: '❌ 错误',
-        successText: '✅ 已复制'
+        successText: '✅'
       },
 
       markdown: {
